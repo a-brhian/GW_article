@@ -1,0 +1,10 @@
+As 7 estações trabalhadas por primeiro foram:
+sbat
+sbbr
+sbbv
+sbcf
+sbcg
+sbcr
+sbct
+
+Os csv devem estar separados por espaço " " e o decimal representado por ".".
