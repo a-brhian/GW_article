@@ -4,11 +4,11 @@
 
 # Comand in CMD: "cd.." (sobe pastas) "cd/d G:" (altera HD)
 # Comand in CMD: [cd Meu Drive\ITA_Brhian\Script]
-# Comand in CMD: python read_data_fft3.py data_test input_samples
+# Comand in CMD: python read_data_fft3_GH.py data_test input_samples
 
 # The data from csv need to be separated by spacing " " and the decimal represented by point "."
 
-# Last update on 08/31/2023 by A. BRHIAN
+# Last update on 09/12/2023 by A. BRHIAN
 
 import numpy as np
 import os
@@ -40,7 +40,7 @@ if len(sys.argv) != 3:
 
 def month_days(month):
     """
-    Defining the acumulated days in each month
+    Defining the accumulated days in each month
     """
     if month == 1:
         days = 0
@@ -70,7 +70,7 @@ def month_days(month):
 
 def station_days(estacao):
     """
-    Label some period accoording their seasons
+    Label some period according their seasons
     """
     ano = 366 #referent on 2014
     if estacao == "su":# summer
@@ -94,25 +94,25 @@ def station_days(estacao):
 
 def func1(x, a, b, c):
     """
-    Definition of the parabolic fuction for the background fitting
+    Definition of the parabolic function for the background fitting
     """
     return a*x**2 + b*x + c
 
 def func2(x, A, B, la):
     """
-    Definition of the cosine and sine fuction for GW fitting
+    Definition of the cosine and sine function for GW fitting
     """
     return A * np.cos(2 * np.pi * x / la) + B * np.sin(2 * np.pi * x / la)
 
 def func3(x, phase, A, la):
     """
-    Definition of the cosine fuction for GW fitting
+    Definition of the cosine function for GW fitting
     """
     return A * np.cos(2 * np.pi * x / la + phase)
 
 def func(x, a, b, c, A, B, la):
     """
-    Definition of the cosine + parabolic fuction for GW complete fitting
+    Definition of the cosine + parabolic function for GW complete fitting
     """
     return a * x ** 2 + b * x + c + A * np.cos(2 * np.pi * x / la) + B * np.sin(2 * np.pi * x / la)
 
@@ -153,7 +153,7 @@ def salvaVariavel(variavel, mean, h_reg):
         analyticVar2 = open(directory[:-10] + "analytic" + "\\" + "bd_Var" + ".csv", "r")
         lista = analyticVar2.readlines()
         analyticVar2.close()
-        print("\n /!\ A planilha \n\t", analyticVar2, "\n foi LIDA com sucesso!\n")
+        print("\n /!\ The spreadsheet \n\t", analyticVar2, "\n was READ with success!\n")
     except:
         analyticVar2 = open(directory[:-10] + "analytic" + "\\" + "bd_Var" + ".csv", "w")
         analyticVar2.writelines(cabecalho)
@@ -161,7 +161,7 @@ def salvaVariavel(variavel, mean, h_reg):
         analyticVar2 = open(directory[:-10] + "analytic" + "\\" + "bd_Var" + ".csv", "r")
         lista = analyticVar2.readlines()
         analyticVar2.close()
-        print("\n /!\ A nova planilha \n\t", analyticVar2, "\n foi CRIADA!\n")
+        print("\n /!\ The new spreadsheet \n\t", analyticVar2, "\n was CREATED!\n")
 
     # Preparing the data that will be salve
     now = datetime.now() # Time of save
@@ -197,7 +197,7 @@ def salvaVariavel(variavel, mean, h_reg):
             lista.append(salvar)
             lista.sort()
             existe = True
-            print(" /!\ Os valores da \n\t", aer_cam_ano_est+variavel, "\n foram ATUALIZADAS no arquivo!\n")
+            print(" /!\ The values from \n\t", aer_cam_ano_est+variavel, "\n were UPDATED in the archive!\n")
             break # The aerodrome will be recorded only one time
 
     # If the archive do not have of aerodrome
@@ -205,19 +205,19 @@ def salvaVariavel(variavel, mean, h_reg):
         if existe == False and lista[0] == cabecalho:
             lista.append(salvar)
             lista.sort()
-            print(" /!\ Os valores da \n\t", aer_cam_ano_est+variavel, "\n foram ADICIONADAS no arquivo!\n")
+            print(" /!\ The values from \n\t", aer_cam_ano_est+variavel, "\n were ADDED in the archive!\n")
     except: # If the archive is empty
         if lista == []:
             lista.append(cabecalho)
             lista.append(salvar)
             lista.sort()
-            print(" /?\ O arquivo estava vazio e uma lista foi CRIADA!\n")
+            print(" /?\ The archive was empty and a new list was CREATED!\n")
 
     # Recording new list in csv
     analyticVar = open(directory[:-10] + "analytic" + "\\" + "bd_Var" + ".csv", "w")
     analyticVar.writelines(lista)
     analyticVar.close()
-    print (" /!\ A planilha: \n\t", analyticVar, "\n acaba de ser FECHADA!\n")
+    print (" /!\ The spreadsheet: \n\t", analyticVar, "\n has just been CLOSE!\n")
 
     return None
 
@@ -244,7 +244,7 @@ def salvaFFT(variavel_FFT, value_FFT, day_FFT):
         analyticFFT2 = open(directory[:-10] + "analytic" + "\\" + "bd_FFT" + ".csv", "r")
         lista = analyticFFT2.readlines()
         analyticFFT2.close()
-        print("\n /!\ A planilha \n\t", analyticFFT2, "\n foi LIDA com sucesso!\n")
+        print("\n /!\ The spreadsheet \n\t", analyticFFT2, "\n was READ with success!\n")
     except:
         analyticFFT2 = open(directory[:-10] + "analytic" + "\\" + "bd_FFT" + ".csv", "w")
         analyticFFT2.writelines(cabecalho)
@@ -252,7 +252,7 @@ def salvaFFT(variavel_FFT, value_FFT, day_FFT):
         analyticFFT2 = open(directory[:-10] + "analytic" + "\\" + "bd_FFT" + ".csv", "r")
         lista = analyticFFT2.readlines()
         analyticFFT2.close()
-        print("\n /!\ A nova planilha \n\t", analyticFFT2, "\n foi CRIADA!\n")
+        print("\n /!\ The new spreadsheet \n\t", analyticFFT2, "\n was CREATED!\n")
 
     # Preparing the data that will be salve
     now = datetime.now()# Time of save
@@ -292,7 +292,7 @@ def salvaFFT(variavel_FFT, value_FFT, day_FFT):
             lista.append(salvar)
             lista.sort()
             existe = True
-            print(" /!\ Os valores da \n\t", aer_cam_ano_est+variavel, "\n foram ATUALIZADAS no arquivo!\n")
+            print(" /!\ The values from \n\t", aer_cam_ano_est+variavel, "\n were UPDATED in the archive!\n")
             break  # The aerodrome will be recorded only one time
 
     # If the archive do not have of aerodrome
@@ -300,19 +300,19 @@ def salvaFFT(variavel_FFT, value_FFT, day_FFT):
         if existe == False and lista[0] == cabecalho:
             lista.append(salvar)
             lista.sort()
-            print(" /!\ Os valores da \n\t", aer_cam_ano_est+variavel, "\n foram ADICIONADAS no arquivo!\n")
+            print(" /!\ The values from \n\t", aer_cam_ano_est+variavel, "\n were ADDED in the archive!\n")
     except:# If the archive is empty
         if lista == []:
             lista.append(cabecalho)
             lista.append(salvar)
             lista.sort()
-            print(" /?\ O arquivo estava vazio e uma lista foi CRIADA!\n")
+            print(" /?\ The archive was empty and a new list was CREATED!\n")
 
     # Recording new list in csv
     analyticFFT = open(directory[:-10] + "analytic" + "\\" + "bd_FFT" + ".csv", "w")
     analyticFFT.writelines(lista)
     analyticFFT.close()
-    print(" /!\ A planilha: \n\t", analyticFFT, "\n acaba de ser FECHADA!\n")
+    print(" /!\ The spreadsheet: \n\t", analyticFFT, "\n has just been CLOSE!\n")
 
     return None
 
@@ -330,7 +330,7 @@ def salvaEst(R_pearson, p_value, slope, intercept, n, std_err):
         analyticEst2 = open(directory[:-10] + "analytic" + "\\" + "bd_Est" + ".csv", "r")
         lista = analyticEst2.readlines()
         analyticEst2.close()
-        print("\n /!\ A planilha \n\t", analyticEst2, "\n foi LIDA com sucesso!\n")
+        print("\n /!\ The spreadsheet \n\t", analyticEst2, "\n was READ with success!\n")
     except:
         analyticEst2 = open(directory[:-10] + "analytic" + "\\" + "bd_Est" + ".csv", "w")
         analyticEst2.writelines(cabecalho)
@@ -338,7 +338,7 @@ def salvaEst(R_pearson, p_value, slope, intercept, n, std_err):
         analyticEst2 = open(directory[:-10] + "analytic" + "\\" + "bd_Est" + ".csv", "r")
         lista = analyticEst2.readlines()
         analyticEst2.close()
-        print("\n /!\ A nova planilha \n\t", analyticEst2, "\n foi CRIADA!\n")
+        print("\n /!\ The new spreadsheet \n\t", analyticEst2, "\n was CREATED!\n")
 
     # Preparing the data that will be salve
     now = datetime.now()  # Time of save
@@ -356,7 +356,7 @@ def salvaEst(R_pearson, p_value, slope, intercept, n, std_err):
             lista.append(salvar)
             lista.sort()
             existe = True
-            print(" /!\ Os valores da \n\t", aer_cam_ano_est + "Est", "\n foram ATUALIZADAS no arquivo!\n")
+            print(" /!\ The values from \n\t", aer_cam_ano_est + "Est", "\n were UPDATED in the archive!\n")
             break  # The aerodrome will be recorded only one time
 
     # If the archive do not have of aerodrome
@@ -364,19 +364,19 @@ def salvaEst(R_pearson, p_value, slope, intercept, n, std_err):
         if existe == False and lista[0] == cabecalho:
             lista.append(salvar)
             lista.sort()
-            print(" /!\ Os valores da \n\t", aer_cam_ano_est + "Est", "\n foram ADICIONADAS no arquivo!\n")
+            print(" /!\ The values from \n\t", aer_cam_ano_est + "Est", "\n were ADDED in the archive!\n")
     except: # If the archive is empty
         if lista == []:
             lista.append(cabecalho)
             lista.append(salvar)
             lista.sort()
-            print(" /?\ O arquivo estava vazio e uma lista foi CRIADA!\n")
+            print(" /?\ The archive was empty and a new list was CREATED!\n")
 
     # Recording new list in csv
     analyticEst = open(directory[:-10] + "analytic" + "\\" + "bd_Est" + ".csv", "w")
     analyticEst.writelines(lista)
     analyticEst.close()
-    print(" /!\ A planilha: \n\t", analyticEst, "\n acaba de ser FECHADA!\n")
+    print(" /!\ The spreadsheet: \n\t", analyticEst, "\n has just been CLOSE!\n")
 
     return None
 
@@ -387,7 +387,7 @@ def salvaEne(energia, tipo, dia, tendencia, beta0, beta1):
 
     # Saving data of variable in (bd_Ene.csv)
     # Creating the head of table
-    intervalo = [0.5 * x for x in range((366 + 2) * 2-1)]#Dias de coleta
+    intervalo = [0.5 * x for x in range((366 + 2) * 2-1)]#Measurements in each day
     todoDia = str(intervalo)
     todoDia = str.replace(todoDia, ",", ";")
     todoDia = str.replace(todoDia, "[", "")
@@ -401,7 +401,7 @@ def salvaEne(energia, tipo, dia, tendencia, beta0, beta1):
         analyticEne2 = open(directory[:-10] + "analytic" + "\\" + "bd_Ene" + ".csv", "r")
         lista = analyticEne2.readlines()
         analyticEne2.close()
-        print (" /!\ A planilha \n\t", analyticEne2, " foi LIDA com sucesso!\n")
+        print (" /!\ The spreadsheet \n\t", analyticEne2, " was READ with success!\n")
     except:
         analyticEne2 = open(directory[:-10] + "analytic" + "\\" + "bd_Ene" + ".csv", "w")
         analyticEne2.writelines(cabecalho)
@@ -409,7 +409,7 @@ def salvaEne(energia, tipo, dia, tendencia, beta0, beta1):
         analyticEne2 = open(directory[:-10] + "analytic" + "\\" + "bd_Ene" + ".csv", "r")
         lista = analyticEne2.readlines()
         analyticEne2.close()
-        print(" /!\ A nova planilha \n\t", analyticEne2, " foi CRIADA!\n")
+        print(" /!\ The new spreadsheet \n\t", analyticEne2, " was CREATED!\n")
 
     # Preparing the data that will be salve
     now = datetime.now() # Time of save
@@ -429,10 +429,10 @@ def salvaEne(energia, tipo, dia, tendencia, beta0, beta1):
             if cont < (len(dia)-1):
                 cont += 1
             while dia[cont] == dia[cont-1]:
-                print(" Foi encontrado multiplicidade de dados no dia[cont]= ", dia[cont], tipo)
+                print(" Was found multiplicity of data on day dia[cont]= ", dia[cont], tipo)
                 cont += 1
                 erroDia += 1 # Count days with multiplicity
-                print(" Este arquivo contem ", erroDia, " dia(s) com multiplicidade")
+                print(" This file have ", erroDia, " day(s) with multiplicity")
         else:
             dadosColetado.insert(i,[]) # If in day DO NOT HAVE info
 
@@ -456,7 +456,7 @@ def salvaEne(energia, tipo, dia, tendencia, beta0, beta1):
 
     # Delete old info and update data
     existe=False
-    for i in range(len(lista)):#Esse programa localiza a estacao no arquivo
+    for i in range(len(lista)):#This "for" localized the aerodrome in the spreadsheet
         # print("Iteracao: ", i, " de ", len(lista))
         # print(" Programa", indicador_ini, "\nArquivo", lista[i][0:16])
         # print(" Programa2", salvar[:37], "\nArquivo2", lista[i][:37])
@@ -465,7 +465,7 @@ def salvaEne(energia, tipo, dia, tendencia, beta0, beta1):
             lista.append(salvar)
             lista.sort()
             existe = True
-            print(" /!\ Os valores de energia da \n\t", aer_cam_ano_est+tipo, "\n foram ATUALIZADAS!\n")
+            print(" /!\ The energy values from \n\t", aer_cam_ano_est+tipo, "\n were UPDATED!\n")
             break #Permite que a estacao seja gravada somente uma vez
 
     # If the archive do not have of aerodrome
@@ -473,19 +473,19 @@ def salvaEne(energia, tipo, dia, tendencia, beta0, beta1):
         if existe == False and lista[0] == cabecalho:
             lista.append(salvar)
             lista.sort()
-            print(" /!\ Dados da \n\t", aer_cam_ano_est+tipo, "\n foram ADICIONADAS no arquivo!\n")
+            print(" /!\ The data \n\t", aer_cam_ano_est+tipo, "\n were ADDED in the spreadsheet!\n")
     except: # If the archive is empty
         if lista == []:
             lista.append(cabecalho)
             lista.append(salvar)
             lista.sort()
-            print(" /?\ O arquivo estava vazio e uma lista foi CRIADA!\n")
+            print(" /?\ The archive was empty and a new list was CREATED!\n")
 
     # Recording new list in csv
     analyticEne = open(directory[:-10] + "analytic" + "\\" + "bd_Ene" + ".csv", "w")
     analyticEne.writelines(lista)
     analyticEne.close()
-    print(" /!\A planilha: \n\t", analyticEne, " acaba de ser FECHADA!\n")
+    print(" /!\ The spreadsheet: \n\t", analyticEne, " has just been CLOSE!\n")
 
     return None
 
@@ -498,7 +498,7 @@ def salvaBrunt(variavel_N, value_N, day_N):
 
     # Saving data of variable in (bd_Brunt.csv)
     # Creating the head of table
-    intervalo = [0.5 * x for x in range((366 + 2) * 2-1)]#Dias de coleta
+    intervalo = [0.5 * x for x in range((366 + 2) * 2-1)]#Days of collect
     todoAlt = str(intervalo)
     todoAlt = str.replace(todoAlt, ",", ";")
     todoAlt = str.replace(todoAlt, "[", "")
@@ -511,7 +511,7 @@ def salvaBrunt(variavel_N, value_N, day_N):
         analyticBrunt = open(directory[:-10] + "analytic" + "\\" + "bd_Brunt" + ".csv", "r")
         lista = analyticBrunt.readlines()
         analyticBrunt.close()
-        print("\n /!\ A planilha \n\t", analyticBrunt, "\n foi LIDA com sucesso!\n")
+        print("\n /!\ The spreadsheet \n\t", analyticBrunt, "\n was READ with success!\n")
     except:
         analyticBrunt = open(directory[:-10] + "analytic" + "\\" + "bd_Brunt" + ".csv", "w")
         analyticBrunt.writelines(cabecalho)
@@ -519,7 +519,7 @@ def salvaBrunt(variavel_N, value_N, day_N):
         analyticBrunt = open(directory[:-10] + "analytic" + "\\" + "bd_Brunt" + ".csv", "r")
         lista = analyticBrunt.readlines()
         analyticBrunt.close()
-        print("\n /!\ A nova planilha \n\t", analyticBrunt, "\n foi CRIADA!\n")
+        print("\n /!\ The new spreadsheet \n\t", analyticBrunt, "\n was CREATED!\n")
 
     # Preparing the data that will be salve
     now = datetime.now() # Time of save
@@ -559,7 +559,7 @@ def salvaBrunt(variavel_N, value_N, day_N):
             lista.append(salvar)
             lista.sort()
             existe = True
-            print(" /!\ Os valores da \n\t", aer_cam_ano_est+variavel, "\n foram ATUALIZADAS no arquivo!\n")
+            print(" /!\ The values from \n\t", aer_cam_ano_est+variavel, "\n were UPDATED in the archive!\n")
             break # The aerodrome will be recorded only one time
 
     # If the archive do not have of aerodrome
@@ -567,19 +567,19 @@ def salvaBrunt(variavel_N, value_N, day_N):
         if existe == False and lista[0] == cabecalho:
             lista.append(salvar)
             lista.sort()
-            print(" /!\ Os valores da \n\t", aer_cam_ano_est+variavel, "\n foram ADICIONADAS no arquivo!\n")
+            print(" /!\ The values from \n\t", aer_cam_ano_est+variavel, "\n were ADDED in the archive!\n")
     except:# If the archive is empty
         if lista == []:
             lista.append(cabecalho)
             lista.append(salvar)
             lista.sort()
-            print(" /?\ O arquivo estava vazio e uma lista foi CRIADA!\n")
+            print(" /?\ The archive was empty and a new list was CREATED!\n")
 
     # Recording new list in csv
     analyticBrunt = open(directory[:-10] + "analytic" + "\\" + "bd_Brunt" + ".csv", "w")
     analyticBrunt.writelines(lista)
     analyticBrunt.close()
-    print(" /!\ A planilha: \n\t", analyticBrunt, "\n acaba de ser FECHADA!\n")
+    print(" /!\ The spreadsheet: \n\t", analyticBrunt, "\n has just been CLOSE!\n")
 
     return None
 
@@ -639,13 +639,15 @@ data_pwind = np.zeros(n_station, dtype=tp_wind)
 #
 ##################################################################################
 
-listAerodrome2014 = ['sbat', 'sbbr', 'sbbv', 'sbcf', 'sbcg',
-                     'sbcr', 'sbct', 'sbcy', 'sbcz', 'sbfi',
-                     'sbfl', 'sbfn', 'sbgl', 'sblo', 'sbmn',
-                     'sbmq', 'sbmt', 'sbmy', 'sbnt', 'sbpa',
-                     'sbpv', 'sbrb', 'sbsl', 'sbsm', 'sbsn',
-                     'sbts', 'sbtt', 'sbua', 'sbug', 'sbul',
-                     'sbvh', 'sbvt']
+# listAerodrome2014 = ['sbat', 'sbbr', 'sbbv', 'sbcf', 'sbcg',
+#                      'sbcr', 'sbct', 'sbcy', 'sbcz', 'sbfi',
+#                      'sbfl', 'sbfn', 'sbgl', 'sblo', 'sbmn',
+#                      'sbmq', 'sbmt', 'sbmy', 'sbnt', 'sbpa',
+#                      'sbpv', 'sbrb', 'sbsl', 'sbsm', 'sbsn',
+#                      'sbts', 'sbtt', 'sbua', 'sbug', 'sbul',
+#                      'sbvh', 'sbvt']
+
+listAerodrome2014 = ['sbat']
 
 stepLSM = 10 # Steps of Least Squared Minimum
 
@@ -912,7 +914,6 @@ for AERODROME in listAerodrome2014:
             u_ones = np.ones(shape=(h_reg.size,))
             print('\t----------->Analysing NORTHERLY winds<-----------\n')
             for i in range(0, len_init_w-1):#9 is altitude, 8 is wind, 7 is direction of wind
-                continue
                 ###################################################
                 #   Verification of day
                 ###################################################
@@ -940,7 +941,7 @@ for AERODROME in listAerodrome2014:
                 print(' NORTHERLY i =', i, 'day =', days, round(i/(len_init_w-2)*100, 2), "% t(min) =", round((time.time()-ini_prog)/60, 2),aer_cam_ano_est)
                 h = data_pwind['mat'][jj][arr_init_w[i]:(arr_init_w[i+1]-1), 9]
                 theta = np.pi*data_pwind['mat'][jj][arr_init_w[i]:(arr_init_w[i+1]-1), 7]/180
-                w = np.multiply(np.cos(theta),data_pwind['mat'][jj][arr_init_w[i]:(arr_init_w[i+1]-1), 8])
+                w = np.multiply(np.sin(theta),data_pwind['mat'][jj][arr_init_w[i]:(arr_init_w[i+1]-1), 8])
                 if len(h) < 2:
                     continue
                 ###################################################
@@ -1107,7 +1108,6 @@ for AERODROME in listAerodrome2014:
             u_ones = np.ones(shape=(h_reg.size,))
             print('\t----------->Analysing EASTERLY winds<-----------\n')
             for i in range(0, len_init_w-1):
-                continue
                 ###################################################
                 #   Verification of day
                 ###################################################
@@ -1136,7 +1136,7 @@ for AERODROME in listAerodrome2014:
                       round((time.time() - ini_prog)/60, 2), aer_cam_ano_est)
                 h = data_pwind['mat'][jj][arr_init_w[i]:(arr_init_w[i+1]-1), 9]
                 theta = np.pi*data_pwind['mat'][jj][arr_init_w[i]:(arr_init_w[i+1]-1), 7]/180
-                w = np.multiply(np.sin(theta), data_pwind['mat'][jj][arr_init_w[i]:(arr_init_w[i+1]-1), 8])# np.sin
+                w = np.multiply(np.cos(theta), data_pwind['mat'][jj][arr_init_w[i]:(arr_init_w[i+1]-1), 8])# np.sin
                 if len(h) < 2:
                     continue
                 ###################################################
@@ -1277,21 +1277,21 @@ for AERODROME in listAerodrome2014:
                 #     # input("Press [enter] to continue.")
                 #     plt.close(fig)
 
-            # Plot anual average and save
-            fig1 = plt.figure(1)
-            mean = np.divide(summ, n_n)
-            plt.plot(h_reg, mean, '-')
-            plt.plot(h_reg, mean*0, '--', color="black")
-            plt.title('Easterly Wind '+aer_cam_ano_est)
-            plt.xlabel('altitude (m)')
-            plt.ylabel('m/s')
-            local = str('analytic' + '\\' + aer_cam_ano_est + 'Ewind.png')
-            plt.savefig(local, format='png', dpi=300)
-            fig1.show()
-            #____________________________
-            #input("Press [enter] to continue.")
-            plt.close(fig1)
-            # salvaVariavel("Ea", mean, h_reg)# Comentario temporario para algoritimo do N de Brunt-Vaisala
+            # # Plot anual average and save
+            # fig1 = plt.figure(1)
+            # mean = np.divide(summ, n_n)
+            # plt.plot(h_reg, mean, '-')
+            # plt.plot(h_reg, mean*0, '--', color="black")
+            # plt.title('Easterly Wind '+aer_cam_ano_est)
+            # plt.xlabel('altitude (m)')
+            # plt.ylabel('m/s')
+            # local = str('analytic' + '\\' + aer_cam_ano_est + 'Ewind.png')
+            # plt.savefig(local, format='png', dpi=300)
+            # fig1.show()
+            # #____________________________
+            # #input("Press [enter] to continue.")
+            # plt.close(fig1)
+            # # salvaVariavel("Ea", mean, h_reg)
 
             # Temperature vs altitude analysis <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
             summ = np.zeros(shape=(h_reg.size,))
@@ -1379,21 +1379,20 @@ for AERODROME in listAerodrome2014:
                 brunt_t_sd[i] = np.std(N_brunt)*grav
                 day_N[i] = days
 
-                print(aer_cam_ano_est)
-                print('wp_str = ', np.reciprocal(np.sqrt(wp_str)), np.reciprocal(np.sqrt(wp_str)).size)
-                print('N_brunt = ', N_brunt, '\t','N_brunt.size = ', N_brunt.size, 'h_str.size = ', h_str.size)
-                print('days =',days,days.size)
+                # print(aer_cam_ano_est)
+                # print('wp_str = ', np.reciprocal(np.sqrt(wp_str)), np.reciprocal(np.sqrt(wp_str)).size)
+                # print('N_brunt = ', N_brunt, '\t','N_brunt.size = ', N_brunt.size, 'h_str.size = ', h_str.size)
+                # print('days =',days,days.size)
 
-                fig1 = plt.figure(1)
-                plt.plot(N_brunt, h_str/1000)
-                plt.xlabel('N (Brunt-Vaisälä)')
-                plt.ylabel('km')
-                fig1.show()
-                # ____________________________
-                input("Press [enter] to continue.")
-                plt.close(fig1)
+                # fig1 = plt.figure(1)
+                # plt.plot(N_brunt, h_str/1000)
+                # plt.xlabel('N (Brunt-Vaisälä)')
+                # plt.ylabel('km')
+                # fig1.show()
+                # # ____________________________
+                # input("Press [enter] to continue.")
+                # plt.close(fig1)
 
-                exit()
                 wp_pot = np.divide(np.divide(w_net, wp_str), N_brunt)
                 #print 'wp_pot', wp_pot
                 fp_fft = interp1d(h_str, wp_pot, kind='linear', bounds_error=False, fill_value=0.0)
@@ -1509,11 +1508,12 @@ for AERODROME in listAerodrome2014:
                 #     plt.close(fig)
 
 
-            print('Mean N = ',brunt_t_mean[brunt_t_mean != 0],'\t'
-                  ,'size_N=',brunt_t_mean[brunt_t_mean != 0].size)
-            print('Sd N = ', brunt_t_sd[brunt_t_mean != 0], '\t'
-                  , 'size_N=', brunt_t_sd[brunt_t_mean != 0].size)
-            print('day_N =',day_N[brunt_t_mean != 0],'\t','size_dayN', day_N[brunt_t_mean != 0].size)
+            # print('Mean N = ',brunt_t_mean[brunt_t_mean != 0],'\t'
+            #       ,'size_N=',brunt_t_mean[brunt_t_mean != 0].size)
+            # print('Sd N = ', brunt_t_sd[brunt_t_mean != 0], '\t'
+            #       , 'size_N=', brunt_t_sd[brunt_t_mean != 0].size)
+            # print('day_N =',day_N[brunt_t_mean != 0],'\t','size_dayN', day_N[brunt_t_mean != 0].size)
+
             if(ESTACAO=='al'):
                 salvaBrunt('N_mean', brunt_t_mean[brunt_t_mean != 0], day_N[brunt_t_mean != 0])
                 salvaBrunt('N_sd', brunt_t_sd[brunt_t_mean != 0], day_N[brunt_t_mean != 0])
@@ -1544,7 +1544,6 @@ for AERODROME in listAerodrome2014:
             fig1 = plt.figure(1)
             print('\t----------->Analysing PRESSURE<-----------\n')
             for i in range(0, len_init_t-1):
-                continue
                 ###################################################
                 #   Verification of day
                 ###################################################
