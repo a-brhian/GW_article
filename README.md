@@ -1,7 +1,5 @@
 [![DOI](https://zenodo.org/badge/686800171.svg)](https://zenodo.org/badge/latestdoi/686800171)
 
-## Step-by-step
-
 #Reference
 
 Supplementary material for the paper "A Survey on Gravity Waves in the Brazilian Sector Based on Radiosonde Measurements from 32 Aerodromes".
