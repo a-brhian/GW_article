@@ -1,6 +1,10 @@
 ## Step-by-step
 
-# Writting...
+#Reference
+
+Supplementary material for the paper "A Survey on Gravity Waves in the Brazilian Sector Based on Radiosonde Measurements from 32 Aerodromes".
+
+# Writting
 
 The ´read_data_fft3_GH.py´ is executed with Python 3.6 and was created by A. Brhian and M. Ridenti.
 
@@ -11,7 +15,7 @@ CD C:\<YOUR DIRECTORY>\python read_data_fft3_GH.py data_test input_samples
 ```
 # The inputs
 
-Where `data_test` is a spreadsheet with extension. csv, separeted by " " and with "." as decimal. This arquive have the following columns:
+Where `data_test` is file with spreadsheets in extension .csv, separeted by " " (on space) and with "." as decimal. Theses arquives have the following columns:
 
 if temperature data (\*_temp.csv):
 - NSINOTICO
@@ -46,7 +50,7 @@ if wind data (\*_vento.csv):
 
 and \* is the acronym from aerodrome.
 
-The ´input_sample´ is was file with following arguments:
+The ´input_sample´ is an file with text archives which have following arguments:
 
 - YEAR (YYYY)
 - Height minimum
@@ -113,3 +117,5 @@ The ´bd_FFT´ is saved the following infos:
 - 0.0 ... 367
 
 Some simples figures are saved in ´analytic´ just only for helping in the visualization of data.
+
+
