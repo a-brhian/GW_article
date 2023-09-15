@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/686800171.svg)](https://zenodo.org/badge/latestdoi/686800171)
+
 ## Step-by-step
 
 #Reference
